@@ -1,0 +1,5 @@
+NAME=base
+DESCRIPTION="Verify CDH4 Pseudo-Destributed Mode for Single Node base configuration"
+VERSION=0.0.1
+REQUIRES=
+EXTERNALS=

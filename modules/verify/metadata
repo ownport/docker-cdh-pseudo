@@ -1,0 +1,5 @@
+NAME=verify
+DESCRIPTION="Verification module"
+VERSION=0.0.1
+REQUIRES=
+EXTERNALS=

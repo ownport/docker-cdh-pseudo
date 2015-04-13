@@ -1,0 +1,5 @@
+NAME=1click-package
+DESCRIPTION="Install Cloudera CDH4/5 One-Click-Install package"
+VERSION=0.0.1
+REQUIRES=
+EXTERNALS=
