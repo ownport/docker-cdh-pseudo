@@ -2,7 +2,7 @@
 
 usage() {
 
-    echo "usage: ./rerun cdh-deploy:verify-cdh4-pseudo-single-node-base <options>"
+    echo "usage: ./rerun verify:cdh-base <options>"
     echo
 }
 
@@ -10,9 +10,9 @@ verify_hadoop_pseudo_conf_package() {
 
     echo -n "- Verifying the hadoop-0.20-conf-pseudo package: "
     dpkg -L hadoop-0.20-conf-pseudo 2> /dev/null && {
-        echo "SUCCESS"
+        echo "- Verification result: SUCCESS"
     } || {
-        echo "FAIL"
+        echo "- Verification result: FAIL"
         exit 1
     }
 }
