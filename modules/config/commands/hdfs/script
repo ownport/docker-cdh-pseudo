@@ -42,9 +42,6 @@ start_hdfs_service() {
     for x in `cd /etc/init.d ; ls hadoop-hdfs-*` ; do 
         sudo service $x start ; 
     done
-    check_java_process namenode
-    check_java_process secondarynamenode
-    check_java_process datanode
 }
 
 
