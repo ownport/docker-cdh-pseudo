@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+. ${RERUN_MODULE_DIR}/lib/service-functions.sh
+
+
+usage() {
+
+    echo "usage: ./rerun verify:hdfs"
+    echo
+}
+
+verify_hdfs_services() {
+
+    echo -n "- Verifying the staus of HDFS services: "
+    check_java_process namenode
+    check_java_process secondarynamenode
+    check_java_process datanode    
+}
+
+verify_hdfs_services

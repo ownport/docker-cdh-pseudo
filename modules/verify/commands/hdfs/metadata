@@ -1,0 +1,5 @@
+NAME=hdfs
+DESCRIPTION="Verify HDFS services for CDH4 Pseudo-Destributed Mode for Single Node"
+VERSION=0.0.1
+REQUIRES=
+EXTERNALS=
