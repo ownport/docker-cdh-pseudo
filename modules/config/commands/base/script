@@ -6,6 +6,10 @@
 #   http://www.cloudera.com/content/cloudera/en/documentation/cdh4/latest/CDH4-Quick-Start/cdh4qs_topic_3_2.html
 #
 
+# load service functions
+
+. ${RERUN_MODULE_DIR}/lib/service-functions.sh
+
 usage() {
 
     [ -z ${RERUN_COMMAND_DIR} ] && {
@@ -22,16 +26,6 @@ usage() {
     echo
 }
 
-verify_hadoop_pseudo_conf_package() {
-
-    echo -n "- Verifying the hadoop-0.20-conf-pseudo packages is installed on your system: "
-    dpkg -L hadoop-0.20-conf-pseudo 2> /dev/null && {
-        echo "SUCCESS"
-    } || {
-        echo "FAIL"
-        exit 1
-    }
-}
 
 namenode_format() {
     
@@ -44,27 +38,15 @@ namenode_format() {
     }
 }
 
-check_service() {
-
-    local _SERVICENAME=${1}
-
-    pgrep -f "java -Dproc_${_SERVICENAME}" 2>&1 > /dev/null && {
-        echo "- The service ${_SERVICENAME} was started successfully"
-    } || {
-        echo "Error! The service ${_SERVICENAME} was not started"
-        exit 1
-    }
-}
-
 start_hdfs_service() {
 
     echo "- Starting HDFS services ..."
     for x in `cd /etc/init.d ; ls hadoop-hdfs-*` ; do 
         sudo service $x start ; 
     done
-    check_service namenode
-    check_service secondarynamenode
-    check_service datanode
+    check_java_process namenode
+    check_java_process secondarynamenode
+    check_java_process datanode
 }
 
 create_mapreduce_dirs() {
@@ -86,13 +68,11 @@ start_mapreduce() {
 
     for x in `cd /etc/init.d ; ls hadoop-0.20-mapreduce-*` ; do sudo service $x start ; done
 
-    check_service jobtracker
-    check_service tasktracker
+    check_java_process jobtracker
+    check_java_process tasktracker
 }
 
 config() {
-    # To verify the hadoop-0.20-conf-pseudo packages on your system. 
-    verify_hadoop_pseudo_conf_package
 
     # Format the NameNode
     namenode_format
@@ -115,49 +95,7 @@ config() {
         sudo -u hdfs hadoop fs -chown cloudera /user/cloudera/    
 }
 
-export_to() {
-
-    local _TARGET_DIR=${1}
-
-    [ -z ${RERUN_COMMAND_DIR} ] && {
-        echo "Error! Export can be done only in rerun environment"
-        exit 1
-    }
-
-    echo "- Exporting '${RERUN_COMMAND_DIR}' to '${_TARGET_DIR}'"
-    [ ! -d "${_TARGET_DIR}" ] && {
-        mkdir -p "${_TARGET_DIR}"
-    }
-    cp "${RERUN_COMMAND_DIR%%/}"/* "${_TARGET_DIR%%/}/" 
-
-    echo "- Export completed"
-}
-
 # ==============================================
 #   Main script
 # ----------------------------------------------
-
-[ "$#" -eq 0 ] && {
-    usage
-}
-
-# Get the options
-while [ "$#" -gt 0 ]; do
-    OPT="$1"
-    case "$OPT" in
-        # options without arguments
-        # options with arguments   
-        --run)
-            config
-            exit 0
-            ;;
-        --export-to)
-            export_to "$2"
-            exit 0
-            ;;
-        *)
-            break
-            ;;   
-    esac
-    shift
-done
+handle_command_options "$@"

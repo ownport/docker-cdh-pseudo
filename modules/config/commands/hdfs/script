@@ -6,6 +6,9 @@
 #   http://www.cloudera.com/content/cloudera/en/documentation/cdh4/latest/CDH4-Quick-Start/cdh4qs_topic_3_2.html
 #
 
+. ${RERUN_MODULE_DIR}/lib/service-functions.sh
+
+
 usage() {
 
     [ -z ${RERUN_COMMAND_DIR} ] && {
@@ -20,36 +23,6 @@ usage() {
         echo "Note: only one option can be defined"
     }
     echo
-}
-
-check_service() {
-
-    local _SERVICENAME=${1}
-
-    pgrep -f "java -Dproc_${_SERVICENAME}" 2>&1 > /dev/null && {
-        echo "- The service ${_SERVICENAME} was started successfully"
-    } || {
-        echo "Error! The service ${_SERVICENAME} was not started"
-        exit 1
-    }
-}
-
-export_to() {
-
-    local _TARGET_DIR=${1}
-
-    [ -z ${RERUN_COMMAND_DIR} ] && {
-        echo "Error! Export can be done only in rerun environment"
-        exit 1
-    }
-
-    echo "- Exporting '${RERUN_COMMAND_DIR}' to '${_TARGET_DIR}'"
-    [ ! -d "${_TARGET_DIR}" ] && {
-        mkdir -p "${_TARGET_DIR}"
-    }
-    cp "${RERUN_COMMAND_DIR%%/}"/* "${_TARGET_DIR%%/}/" 
-
-    echo "- Export completed"
 }
 
 namenode_format() {
@@ -69,9 +42,9 @@ start_hdfs_service() {
     for x in `cd /etc/init.d ; ls hadoop-hdfs-*` ; do 
         sudo service $x start ; 
     done
-    check_service namenode
-    check_service secondarynamenode
-    check_service datanode
+    check_java_process namenode
+    check_java_process secondarynamenode
+    check_java_process datanode
 }
 
 
@@ -95,28 +68,5 @@ config() {
 # ==============================================
 #   Main script
 # ----------------------------------------------
+handle_command_options "$@"
 
-[ "$#" -eq 0 ] && {
-    usage
-}
-
-# Get the options
-while [ "$#" -gt 0 ]; do
-    OPT="$1"
-    case "$OPT" in
-        # options without arguments
-        # options with arguments   
-        --run)
-            config
-            exit 0
-            ;;
-        --export-to)
-            export_to "$2"
-            exit 0
-            ;;
-        *)
-            break
-            ;;   
-    esac
-    shift
-done
