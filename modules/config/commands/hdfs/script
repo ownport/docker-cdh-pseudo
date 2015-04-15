@@ -14,7 +14,7 @@ usage() {
     [ -z ${RERUN_COMMAND_DIR} ] && {
         echo "usage: ${0} <options>"
     } || {
-        echo "usage: ./rerun cdh-deploy:config-cdh4-pseudo-single-node-hdfs <options>"
+        echo "usage: ./rerun config:hdfs <options>"
     }
     echo "    --run:    run basic HDFS configuration of CDH4 Pseudo distributed Single node cluster"
     [ ! -z ${RERUN_COMMAND_DIR} ] && {
