@@ -1,4 +1,4 @@
-NAME=config-cdh4-pseudo-single-mode-base
+NAME=config-base
 DESCRIPTION="Configure CDH4 Pseudo-Destributed Mode for Single Node"
 VERSION=0.0.1
 REQUIRES=

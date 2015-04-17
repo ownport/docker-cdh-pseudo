@@ -1,4 +1,4 @@
-NAME=config-cdh4-pseudo-single-mode-hdfs
+NAME=config-hdfs
 DESCRIPTION="Configure HDFS for CDH4 Pseudo-Destributed Mode for Single Node"
 VERSION=0.0.1
 REQUIRES=
