@@ -40,4 +40,19 @@ $ docker build -t "cdh4-pdsn-hdfs" dockerfiles/cdh4-pdsn-hdfs/
 $
 ```
 
+## Runlevels
+
+Runlevel | Services
+-------- | ----------------
+rc1      | hdfs
+rc2      | mr1
+rc3      | 
+rc4      |
+rc5      |
+rc6      |
+rc7      |
+rc8      |
+rc9      |
+
+
 
