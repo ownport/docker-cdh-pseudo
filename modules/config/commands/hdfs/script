@@ -67,7 +67,7 @@ config() {
     # Create User Directories 
     echo "- Creating default directory: /user/cloudera/"
     sudo -u hdfs hadoop fs -mkdir /user/cloudera && \
-        sudo -u hdfs hadoop fs -chown cloudera /user/cloudera/    
+        sudo -u hdfs hadoop fs -chown cloudera:cloudera /user/cloudera/    
 
     # Verify HDFS services
     verify_hdfs_services
