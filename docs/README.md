@@ -44,6 +44,7 @@ $
 
 Runlevel | Services
 -------- | ----------------
+rc0      | init
 rc1      | hdfs
 rc2      | mr1
 rc3      | 
