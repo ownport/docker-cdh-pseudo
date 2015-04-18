@@ -30,3 +30,14 @@ Checking connectivity... done.
 $
 ```
 
+### Creating Docker CDH Pseudo images
+
+```sh
+$ cd docker-cdh-pseudo/
+$ docker build -t "cdh4-base" dockerfiles/cdh4-base/
+$ docker build -t "cdh4-pdsn-base" dockerfiles/cdh4-pdsn-base/
+$ docker build -t "cdh4-pdsn-hdfs" dockerfiles/cdh4-pdsn-hdfs/
+$
+```
+
+
