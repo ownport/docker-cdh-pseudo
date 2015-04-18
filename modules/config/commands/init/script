@@ -10,6 +10,9 @@ RUNLEVEL="rc0"
 
 . ${RERUN_MODULES%%/}/lib/service-functions.sh     
 
+#
+#   show usage
+#
 usage() {
 
     [ -z ${RERUN_COMMAND_DIR} ] && {
@@ -26,11 +29,22 @@ usage() {
     echo
 }
 
+#
+#   run 
+#
 run() {
 
     for level in $(ls ${RERUN_MODULES})
     do
-        echo ${level}
+        ( [[ ${level} == rc* ]] && [[ ${level} != "rc0" ]] ) && {
+
+            [ -d ${RERUN_MODULES%%/}/${level}/commands/ ] && {
+                for command in $(ls ${RERUN_MODULES%%/}/${level}/commands/ )
+                do
+                    ${RERUN} ${level}:${command} --run
+                done
+            }
+        }
     done
 }
 

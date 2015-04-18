@@ -38,7 +38,7 @@ prepare_directory() {
         }
     } 
 
-    for rc_level in $(seq 1 9)
+    for rc_level in $(seq 0 9)
     do
         local _CURRENT_RUNLEVEL_DIR="${_TARGET_DIR%%/}/modules/rc${rc_level}/"
         mkdir -p ${_CURRENT_RUNLEVEL_DIR}
@@ -104,7 +104,7 @@ handle_command_options() {
             # options without arguments
             # options with arguments   
             --run)
-                config
+                run
                 exit 0
                 ;;
             --export-to)

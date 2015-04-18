@@ -75,7 +75,7 @@ start_mapreduce() {
     check_service tasktracker
 }
 
-config() {
+run() {
 
     # Create the MapReduce system directories
     create_mapreduce_dirs

@@ -72,7 +72,7 @@ start_mapreduce() {
     check_java_process tasktracker
 }
 
-config() {
+run() {
 
     # Format the NameNode
     namenode_format

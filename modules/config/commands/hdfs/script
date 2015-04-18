@@ -53,7 +53,7 @@ verify_hdfs_services() {
     check_java_process datanode    
 }
 
-config() {
+run() {
 
     # Format the NameNode
     namenode_format
