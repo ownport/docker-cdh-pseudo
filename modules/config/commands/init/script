@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+#
+#   TODO: add Kerberos support
+#
+#   Installing CDH4 with MRv1 on a Single Linux Node in Pseudo-distributed mode 
+#   http://www.cloudera.com/content/cloudera/en/documentation/cdh4/latest/CDH4-Quick-Start/cdh4qs_topic_3_2.html
+#
+
+RUNLEVEL="rc0"
+
+. ${RERUN_MODULES%%/}/lib/service-functions.sh     
+
+usage() {
+
+    [ -z ${RERUN_COMMAND_DIR} ] && {
+        echo "usage: ${0} <options>"
+    } || {
+        echo "usage: ./rerun config:init <options>"
+    }
+    echo "    --run:    run all config scripts according to rc* priority"
+    [ ! -z ${RERUN_COMMAND_DIR} ] && {
+        echo "    --export-to <directory>: export init script to <directory>"
+        echo 
+        echo "Note: only one option can be defined"
+    }
+    echo
+}
+
+run() {
+
+    for level in $(ls ${RERUN_MODULES})
+    do
+        echo ${level}
+    done
+}
+
+# ==============================================
+#   Main script
+# ----------------------------------------------
+handle_command_options "$@"
+
