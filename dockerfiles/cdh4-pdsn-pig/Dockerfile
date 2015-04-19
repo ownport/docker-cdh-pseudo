@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN mkdir -p /deploy/ && \
     wget --no-check-certificate -qO- https://github.com/ownport/docker-cdh-pseudo/archive/master.tar.gz | tar -xz -C /deploy
 
-RUN apt-get update && apt-get install -y hive
+RUN apt-get update && apt-get install -y pig
 
 RUN /deploy/docker-cdh-pseudo-master/rerun config:init --export-to /configs/
 
