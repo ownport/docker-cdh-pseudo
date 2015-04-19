@@ -11,6 +11,9 @@ RUN /deploy/docker-cdh-pseudo-master/rerun config:mr1 --export-to /configs/
 # clean temporary files after installation
 RUN /deploy/docker-cdh-pseudo-master/rerun misc:clean
 
+# JobTracker
+EXPOSE 50030 50060 8021 9290
+
 # Run configuration
 CMD ["/configs/rerun", "rc0:config-init", "--run"]
 
