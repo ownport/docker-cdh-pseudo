@@ -37,6 +37,8 @@ $ cd docker-cdh-pseudo/
 $ docker build -t "cdh4-base" dockerfiles/cdh4-base/
 $ docker build -t "cdh4-pdsn-base" dockerfiles/cdh4-pdsn-base/
 $ docker build -t "cdh4-pdsn-hdfs" dockerfiles/cdh4-pdsn-hdfs/
+$ docker build -t "cdh4-pdsn-mr1" dockerfiles/cdh4-pdsn-mr1/
+$ docker build -t "cdh4-pdsn-oozie" dockerfiles/cdh4-pdsn-oozie/
 $
 ```
 
@@ -47,7 +49,7 @@ Runlevel | Services
 rc0      | init
 rc1      | hdfs
 rc2      | mr1
-rc3      | 
+rc3      | oozie
 rc4      |
 rc5      |
 rc6      |
