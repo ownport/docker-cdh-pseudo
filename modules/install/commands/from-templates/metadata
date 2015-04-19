@@ -1,0 +1,5 @@
+NAME=make-dockerfile
+DESCRIPTION="Make Dockerfile for installation Cloudera CDH4/5 from templates"
+VERSION=0.0.1
+REQUIRES=
+EXTERNALS=
