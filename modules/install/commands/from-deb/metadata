@@ -1,0 +1,5 @@
+NAME=install-from-deb
+DESCRIPTION="Install Cloudera CDH4/5 component from .deb (Ubuntu)"
+VERSION=0.0.1
+REQUIRES=
+EXTERNALS=

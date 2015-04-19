@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+COMPONENT=${1}
+
+#
+#   usage
+#
+usage() {
+
+    echo "usage: ./rerun install:from-deb <component-name>"
+    echo
+}
+
+#
+#   install component
+#
+install() {
+
+    local _COMPONENT=${1}
+    local _CURR_PATH=$(pwd)
+
+    echo "- Installation of ${_COMPONENT}" && \
+            mkdir -p /tmp/install-from-deb/ && apt-get download ${_COMPONENT} && \
+            dpkg -i $(ls *.deb) && \
+            cd ${_CURR_PATH} && rm -rf /tmp/install-from-deb/ && \
+            echo "- Installation completed"
+}
+ 
+[ -z ${COMPONENT} ] && {
+    echo "** Error! Component name is not specified"
+    exit 1
+} 
+
+install ${COMPONENT}
+
+
+
